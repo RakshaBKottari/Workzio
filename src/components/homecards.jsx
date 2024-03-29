@@ -1,0 +1,43 @@
+import React from "react";
+import Card from "./card";
+
+function homecards() {
+  return (
+    <div>
+      <section class="py-4">
+        <div class="container-xl lg:container m-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg">
+            <Card bg="bg-blue-100">
+              <h2 class="text-2xl font-bold">For Developers</h2>
+              <p class="mt-2 mb-4">
+                Browse our React jobs and start your career today
+              </p>
+              <a
+                href="/jobs.html"
+                class="inline-block bg-indigo-500 text-white rounded-lg px-4 py-2 hover:bg-gray-700"
+              >
+                Browse Jobs
+              </a>
+            </Card>
+            {/* 2nd card */}
+
+            <Card>
+              <h2 class="text-2xl font-bold">For Employers</h2>
+              <p class="mt-2 mb-4">
+                List your job to find the perfect developer for the role
+              </p>
+              <a
+                href="/add-job.html"
+                class="inline-block bg-indigo-500 text-white rounded-lg px-4 py-2 hover:bg-gray-700"
+              >
+                Add Job
+              </a>
+            </Card>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export default homecards;

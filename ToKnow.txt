@@ -1,0 +1,45 @@
+import React from "react";
+import Navbar from "./components/nav";
+import Hero from "./components/hero";
+import Homecards from "./components/homecards";
+import JobListing from "./components/JobListing";
+import ViewAll from "./components/viewall";
+
+const App = () => {
+  return (
+    <div>
+      <Navbar />
+      <Hero title="Frontend Developer" subtitle="Computer science engineer" />
+      <Homecards />
+      <JobListing />
+      <ViewAll />
+    </div>
+  );
+};
+
+export default App;
+
+// const name = "jhone";
+// const people = ["hh", "gg", "ff"];
+// <div>
+//   <div className="text-5xl">hiii</div>
+//   <p className="text-2xl">{name}</p>
+//   <ul>
+//     {people.map((person, index) => (
+//       <div key={index}>
+//         <li>{person}</li>
+//         {index % 2 === 0 ? <p>hesrdtfgyhujikoe</p> : ""}
+//       </div>
+//     ))}
+//     {/* <p>he</p> */}
+//   </ul>
+// </div>
+
+domian name {if there is a single slash then it a path eg:rakshith.com/home}
+if(
+  there is multiple slash 
+  then:
+  {
+    last one is param -> eg:rakshith.com/home/p1/123456jdk {here 123456jdk is param}
+  }
+)
