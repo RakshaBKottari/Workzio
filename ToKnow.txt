@@ -43,3 +43,21 @@ if(
     last one is param -> eg:rakshith.com/home/p1/123456jdk {here 123456jdk is param}
   }
 )
+vercel.json
+
+// {
+//   "version": 2,
+//   "builds": [
+//     {
+//       "src": "frontend",
+//       "use": "@vercel/static-build",
+//       "config": {
+//         "buildCommand": "npm run build",
+//         "outputDirectory": "dist/frontend"
+//       }
+//     }
+//   ],
+//   "functions": {
+//     "api/server.js": { "runtime": "nodejs14.x" }
+//   }
+// }
