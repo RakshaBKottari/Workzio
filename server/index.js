@@ -1,128 +1,54 @@
-const http = require("http");
+const jsonServer = require("json-server");
+const path = require("path");
 const fs = require("fs");
-const url = require("url");
 
-// Function to read jobs data from the JSON file
-function readJobsData() {
-  const jobsData = fs.readFileSync("jobs.json", "utf8");
-  return JSON.parse(jobsData).jobs;
-}
+const dataFile = path.join(__dirname, "jobs.json");
+const data = JSON.parse(fs.readFileSync(dataFile, "utf8"));
 
-// Function to write jobs data to the JSON file
-function writeJobsData(jobs) {
-  fs.writeFileSync("jobs.json", JSON.stringify({ jobs }, null, 2));
-}
+const server = jsonServer.create();
+const router = jsonServer.router(data);
+const middlewares = jsonServer.defaults();
 
-const server = http.createServer((req, res) => {
-  // Set CORS headers to allow access from any origin
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Request-Method", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "OPTIONS, GET, POST, PUT, DELETE"
-  );
-  res.setHeader("Access-Control-Allow-Headers", "*");
+server.use(middlewares);
+server.use(jsonServer.bodyParser);
 
-  // Parse the request URL
-  const { method, url: reqUrl } = req;
-  const parsedUrl = url.parse(reqUrl, true);
+// Custom routes
+server.get("/jobs", (req, res) => {
+  const limit = req.query._limit || data.jobs.length;
+  const limitedJobs = data.jobs.slice(0, limit);
+  res.json(limitedJobs);
+});
 
-  // If the request method is OPTIONS, return immediately
-  if (method === "OPTIONS") {
-    res.writeHead(200);
-    res.end();
-    return;
-  }
+server.post("/jobs", (req, res) => {
+  const newJob = req.body;
+  data.jobs.push(newJob);
+  fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+  res.status(201).json(newJob);
+});
 
-  // Check the request method and handle accordingly
-  switch (method) {
-    case "GET":
-      // GET request to /jobs or with query parameters
-      if (parsedUrl.pathname === "/jobs") {
-        const jobs = readJobsData();
-        const limit = parsedUrl.query._limit || jobs.length; // Default limit is all jobs
-        const limitedJobs = jobs.slice(0, limit);
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(limitedJobs));
-      } else {
-        res.writeHead(404);
-        res.end("404 Not Found");
-      }
-      break;
-    case "POST":
-      // POST request to /jobs to add a new job
-      if (parsedUrl.pathname === "/jobs") {
-        let body = "";
-        req.on("data", (chunk) => {
-          body += chunk.toString();
-        });
-        req.on("end", () => {
-          const newJob = JSON.parse(body);
-          const jobs = readJobsData();
-          jobs.push(newJob);
-          writeJobsData(jobs);
-          res.writeHead(201, { "Content-Type": "application/json" });
-          res.end(JSON.stringify(newJob));
-        });
-      } else {
-        res.writeHead(404);
-        res.end("404 Not Found");
-      }
-      break;
-    case "PUT":
-      // PUT request to /jobs/:id to update a job
-      if (parsedUrl.pathname.startsWith("/jobs/")) {
-        const jobId = parsedUrl.pathname.split("/")[2];
-        let body = "";
-        req.on("data", (chunk) => {
-          body += chunk.toString();
-        });
-        req.on("end", () => {
-          const updatedJob = JSON.parse(body);
-          const jobs = readJobsData();
-          const index = jobs.findIndex((job) => job.id === jobId);
-          if (index !== -1) {
-            jobs[index] = { ...jobs[index], ...updatedJob };
-            writeJobsData(jobs);
-            res.writeHead(200, { "Content-Type": "application/json" });
-            res.end(JSON.stringify(jobs[index]));
-          } else {
-            res.writeHead(404);
-            res.end("404 Not Found");
-          }
-        });
-      } else {
-        res.writeHead(404);
-        res.end("404 Not Found");
-      }
-      break;
-    case "DELETE":
-      // DELETE request to /jobs/:id to delete a job
-      if (parsedUrl.pathname.startsWith("/jobs/")) {
-        const jobId = parsedUrl.pathname.split("/")[2];
-        const jobs = readJobsData();
-        const index = jobs.findIndex((job) => job.id === jobId);
-        if (index !== -1) {
-          const deletedJob = jobs.splice(index, 1)[0];
-          writeJobsData(jobs);
-          res.writeHead(200, { "Content-Type": "application/json" });
-          res.end(JSON.stringify(deletedJob));
-        } else {
-          res.writeHead(404);
-          res.end("404 Not Found");
-        }
-      } else {
-        res.writeHead(404);
-        res.end("404 Not Found");
-      }
-      break;
-    default:
-      res.writeHead(405);
-      res.end("Method Not Allowed");
+server.put("/jobs/:id", (req, res) => {
+  const jobId = parseInt(req.params.id);
+  const updatedJob = req.body;
+  const index = data.jobs.findIndex((job) => job.id === jobId);
+  if (index !== -1) {
+    data.jobs[index] = { ...data.jobs[index], ...updatedJob };
+    fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+    res.json(data.jobs[index]);
+  } else {
+    res.status(404).json({ error: "Job not found" });
   }
 });
 
-const PORT = process.env.PORT || 8000;
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+server.delete("/jobs/:id", (req, res) => {
+  const jobId = parseInt(req.params.id);
+  const index = data.jobs.findIndex((job) => job.id === jobId);
+  if (index !== -1) {
+    const deletedJob = data.jobs.splice(index, 1)[0];
+    fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+    res.json(deletedJob);
+  } else {
+    res.status(404).json({ error: "Job not found" });
+  }
 });
+
+module.exports = server;
