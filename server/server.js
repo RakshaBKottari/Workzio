@@ -11,14 +11,12 @@ server.use(middlewares);
 server.use(
   // Add custom route here if needed
   jsonServer.rewriter({
-    "/api/*": "/$1",
+    "/jobs/": "/", // Rewrites routes to prefix with /jobs
   })
 );
 server.use(router);
 // Listen to port
-server.listen(3000, () => {
-  console.log("JSON Server is running");
+const PORT = process.env.PORT || 3000; // Use environment port if available
+server.listen(PORT, () => {
+  console.log(`JSON Server is running on port ${PORT}`);
 });
-
-// Export the Server API
-module.exports = server;

@@ -3,16 +3,17 @@
   "builds": [
     {
       "src": "server.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["db.json"]
-      }
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
+      "src": "/jobs/(.*)",
+      "dest": "/server.js"
+    },
+    {
       "src": "/(.*)",
-      "dest": "server.js"
+      "dest": "/server.js"
     }
   ]
 }
