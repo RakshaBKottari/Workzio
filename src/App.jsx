@@ -24,7 +24,7 @@ import Notfound from "./pages/notfound";
 
 const App = () => {
   const deleteJob = async (id) => {
-    const res = await fetch(`http://localhost:8000/jobs/${id}`, {
+    const res = await fetch(`https://fakejobs-api.vercel.app/jobs/${id}`, {
       method: "DELETE",
     });
     return;
@@ -33,7 +33,7 @@ const App = () => {
   const updatedJob = async (updatedJobData) => {
     const { id } = updatedJobData;
     try {
-      const res = await fetch(`http://localhost:8000/jobs/${id}`, {
+      const res = await fetch(`https://fakejobs-api.vercel.app/jobs/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
