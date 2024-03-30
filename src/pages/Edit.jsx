@@ -19,7 +19,7 @@ const Edit = ({ updateJobSubmit }) => {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const res = await fetch(`http://localhost:8000/jobs/${id}`);
+        const res = await fetch(`https://fakejobs-api.vercel.app/jobs/${id}`);
         if (!res.ok) {
           throw new Error("Failed to fetch job");
         }
