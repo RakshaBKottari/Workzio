@@ -61,3 +61,6 @@ vercel.json
 //     "api/server.js": { "runtime": "nodejs14.x" }
 //   }
 // }
+
+server script- "json-server"
+    "server": "json-server --watch src/jobs.json --port 8000"
