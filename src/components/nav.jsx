@@ -20,13 +20,13 @@ function nav() {
                 <div class="flex space-x-2">
                   <Link
                     to="/"
-                    class="text-amber-300 hover:bg-violet-600 hover:text-amber-300 font-bold rounded-md px-3 py-2"
+                    class="text-amber-300 hover:bg-cyan-700 hover:text-amber-300 font-bold rounded-md px-3 py-2"
                   >
                     Home
                   </Link>
                   <Link
                     to="/Jobspage"
-                    class="text-amber-300 hover:bg-violet-600 hover:text-amber-300 font-bold rounded-md px-3 py-2"
+                    class="text-amber-300 hover:bg-cyan-700 hover:text-amber-300 font-bold rounded-md px-3 py-2"
                   >
                     Jobs
                   </Link>
