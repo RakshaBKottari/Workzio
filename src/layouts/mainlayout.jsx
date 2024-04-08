@@ -1,5 +1,6 @@
 import React from "react";
-import { Outlet } from "react-router-dom"; //libary or package
+//libary or package
+// import { Outlet } from "react-router-dom";
 import Navbar from "../components/nav";
 
 const mainlayout = () => {
