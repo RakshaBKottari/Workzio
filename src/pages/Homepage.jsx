@@ -2,7 +2,7 @@ import React from "react";
 import Hero from "../components/hero";
 import Homecards from "../components/homecards";
 import JobListing from "../components/JobListing";
-import ViewAll from "../components/viewall";
+import Footer from "../components/footer";
 
 const Homepage = () => {
   return (
@@ -13,7 +13,7 @@ const Homepage = () => {
       />
       <Homecards />
       <JobListing isHome={true} />
-      <ViewAll />
+      <Footer />
     </div>
   );
 };

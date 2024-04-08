@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import JobListing from "./JobListings";
+import { Link } from "react-router-dom";
 
 const JobListings = ({ isHome = false }) => {
   const [jobs, setJobs] = useState([]);
@@ -34,6 +35,14 @@ const JobListings = ({ isHome = false }) => {
             <JobListing key={job.id} job={job} />
           ))}
         </div>
+        <section class="m-auto max-w-lg my-10 px-6">
+          <Link
+            to="/Jobspage"
+            class="block bg-cyan-800 text-yellow-200 font-bold text-center py-4 px-6 rounded-xl hover:bg-gray-700"
+          >
+            View All Jobs
+          </Link>
+        </section>
       </div>
     </section>
   );
