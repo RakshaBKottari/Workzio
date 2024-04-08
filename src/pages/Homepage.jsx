@@ -7,7 +7,10 @@ import ViewAll from "../components/viewall";
 const Homepage = () => {
   return (
     <div>
-      <Hero title="Frontend Developer" subtitle="Computer science engineer" />
+      <Hero
+        title="Simplifying Job Search"
+        subtitle="Workzio streamlines job searching with its intuitive platform. Users easily find tailored job opportunities and apply seamlessly, connecting with their ideal careers."
+      />
       <Homecards />
       <JobListing isHome={true} />
       <ViewAll />
