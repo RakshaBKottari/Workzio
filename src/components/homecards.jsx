@@ -6,29 +6,33 @@ function homecards() {
     <div>
       <section class="py-4">
         <div class="container-xl lg:container m-auto">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-lg">
-            <Card bg="bg-blue-100">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-40 rounded-lg">
+            <Card bg="bg-cyan-100">
               <h2 class="text-2xl font-bold">For Developers</h2>
-              <p class="mt-2 mb-4">
-                Browse our React jobs and start your career today
+              <p className="mt-2 mb-4">
+                Calling all developers! Explore exciting job opportunities
+                tailored just for you. Click the 'Browse Jobs' button below to
+                discover roles that match your skills and interests. Start your
+                next career adventure today!
               </p>
               <a
                 href="/jobs.html"
-                class="inline-block bg-indigo-500 text-white rounded-lg px-4 py-2 hover:bg-gray-700"
+                class="inline-block bg-cyan-900 text-white rounded-lg px-4 py-2 hover:bg-gray-600"
               >
                 Browse Jobs
               </a>
             </Card>
-            {/* 2nd card */}
-
-            <Card>
+            <Card bg="bg-cyan-100">
               <h2 class="text-2xl font-bold">For Employers</h2>
               <p class="mt-2 mb-4">
-                List your job to find the perfect developer for the role
+                Attract top talent for your team! Post job openings and connect
+                with skilled professionals eager to join your company. Click the
+                'Post a Job' button below to get started and find the perfect
+                fit for your organization.
               </p>
               <a
                 href="/add-job.html"
-                class="inline-block bg-indigo-500 text-white rounded-lg px-4 py-2 hover:bg-gray-700"
+                class="inline-block bg-cyan-900 text-white rounded-lg px-4 py-2 hover:bg-gray-600"
               >
                 Add Job
               </a>
