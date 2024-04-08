@@ -10,7 +10,7 @@ function nav() {
           <div class="flex h-20 items-center justify-between">
             <div class="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
               {/* <!-- Logo --> */}
-              <a class="flex flex-shrink-0 items-center mr-4" href="/">
+              <a class="flex items-center mr-4" href="/">
                 <img class="h-10 w-auto" src={Logo} alt="workzio" />
                 <span class="hidden md:block text-amber-300 text-2xl font-bold ml-2">
                   Workzio
